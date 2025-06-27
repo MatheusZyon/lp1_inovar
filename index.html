@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
-    <link rel="icon" href="https://placehold.co/32x32/BF6240/F4F1EB?text=I" type="image/png">
+    <link rel="icon" href="images/favicon.png" type="image/png">
 
     <style>
         /* Estilos personalizados com a paleta de cores e design dinâmico */
@@ -36,7 +36,7 @@
             color: var(--color-text-dark);
         }
         .hero-bg {
-            background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop');
+            background-image: url('images/banner.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -65,6 +65,16 @@
             border-color: var(--color-accent-primary);
             outline: none;
             box-shadow: 0 0 0 2px rgba(191, 98, 64, 0.2);
+        }
+        .form-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238C7B69' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
         }
 
         .underline-link {
@@ -119,7 +129,7 @@
         <div class="bg-black bg-opacity-60 min-h-screen relative flex items-center">
             <!-- Logo -->
             <div class="absolute top-0 left-1/2 -translate-x-1/2 p-6">
-                 <img src="images/logo_branco.png" alt="Logo Inovar Esquadrias" class="h-10 lg:h-12">
+                 <img src="images/logo_branco.png" alt="Logo Inovar Esquadrias" class="h-10 lg:h-12 w-auto">
             </div>
             
             <!-- Content -->
@@ -148,7 +158,7 @@
                 </div>
             </div>
             <div class="lg:w-1/2 h-96 lg:h-auto">
-                 <img src="images/b2.jpg" class="h-full w-full object-cover clip-presentation-img" alt="[Interior de uma sala moderna com janelas amplas]" onerror="this.onerror=null;this.src='https://placehold.co/800x600/272733/FFFFFF?text=Design';">
+                 <img src="images/b2.jpg" class="h-full w-full object-cover clip-presentation-img" alt="Interior de uma sala moderna com janelas amplas">
             </div>
         </div>
     </section>
@@ -158,7 +168,7 @@
         <div class="container mx-auto px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
                 <div class="relative shadow-2xl overflow-hidden">
-                    <img src="images/casa_nk.jpg" class="w-full h-full object-cover" alt="[Detalhe arquitetónico que inspira confiança]" onerror="this.onerror=null;this.src='https://placehold.co/600x800/F4F1EB/272733?text=Nossa+Essência';">
+                    <img src="images/casa_nk.jpg" class="w-full h-full object-cover" alt="Detalhe arquitetónico que inspira confiança">
                 </div>
                 <div>
                      <h2 class="text-3xl md:text-4xl font-light text-dark mb-10">Nossa Essência</h2>
@@ -194,7 +204,7 @@
                 </div>
             </div>
             <div class="lg:w-1/2 h-96 lg:h-auto">
-                <img src="images/aw2.jpg" class="h-full w-full object-cover clip-diagonal-img" alt="[Detalhe de esquadria minimalista em ambiente de luxo]" onerror="this.onerror=null;this.src='https://placehold.co/800x600/272733/FFFFFF?text=Planejamento';">
+                <img src="images/aw2.jpg" class="h-full w-full object-cover clip-diagonal-img" alt="Detalhe de esquadria minimalista em ambiente de luxo">
             </div>
         </div>
     </section>
@@ -244,17 +254,17 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center">
                 <div class="group">
-                    <div class="mb-4 shadow-lg overflow-hidden bg-dark"><img src="images/casa_cor.jpg" alt="[Projeto Fazenda Carolina]" class="w-full h-96 object-cover transform group-hover:scale-105 transition-transform duration-700 clip-img-1" onerror="this.onerror=null;this.src='https://placehold.co/600x800/F4F1EB/272733?text=Projeto+1';"></div>
+                    <div class="mb-4 shadow-lg overflow-hidden bg-dark"><img src="images/casa_cor.jpg" class="w-full h-96 object-cover transform group-hover:scale-105 transition-transform duration-700 clip-img-1" alt="Projeto Casa Cor"></div>
                     <h3 class="text-xl font-semibold text-dark">Casa Cor</h3>
                     <a href="#contato" class="underline-link">Ver mais</a>
                 </div>
                 <div class="group">
-                    <div class="mb-4 shadow-lg overflow-hidden bg-dark"><img src="images/casa_neblina.jpg" alt="[Projeto Ibiá House]" class="w-full h-96 object-cover transform group-hover:scale-105 transition-transform duration-700 clip-img-2" onerror="this.onerror=null;this.src='https://placehold.co/600x800/F4F1EB/272733?text=Projeto+2';"></div>
+                    <div class="mb-4 shadow-lg overflow-hidden bg-dark"><img src="images/casa_neblina.jpg" class="w-full h-96 object-cover transform group-hover:scale-105 transition-transform duration-700 clip-img-2" alt="Projeto Casa Neblina"></div>
                     <h3 class="text-xl font-semibold text-dark">Casa Neblina</h3>
                     <a href="#contato" class="underline-link">Ver mais</a>
                 </div>
                 <div class="group">
-                    <div class="mb-4 shadow-lg overflow-hidden bg-dark"><img src="images/paraty.jpg" alt="[Projeto Casa França]" class="w-full h-96 object-cover transform group-hover:scale-105 transition-transform duration-700 clip-img-1" onerror="this.onerror=null;this.src='https://placehold.co/600x800/F4F1EB/272733?text=Projeto+3';"></div>
+                    <div class="mb-4 shadow-lg overflow-hidden bg-dark"><img src="images/paraty.jpg" class="w-full h-96 object-cover transform group-hover:scale-105 transition-transform duration-700 clip-img-1" alt="Projeto Paraty House"></div>
                     <h3 class="text-xl font-semibold text-dark">Paraty House</h3>
                     <a href="#contato" class="underline-link">Ver mais</a>
                 </div>
@@ -267,7 +277,7 @@
         <div class="container mx-auto px-6 lg:px-8 max-w-4xl">
             <div class="grid lg:grid-cols-3 gap-8 items-center">
                  <div class="flex justify-center">
-                    <img src="images/maos.jpg" class="w-32 h-32 object-cover border-4 border-gray-700" alt="[Aperto de mãos profissional simbolizando uma parceria de sucesso]">
+                    <img src="images/maos.jpg" class="w-32 h-32 object-cover border-4 border-gray-700" alt="Aperto de mãos profissional simbolizando uma parceria de sucesso">
                  </div>
                  <div class="lg:col-span-2 mt-6 lg:mt-0 text-center lg:text-left">
                     <p class="text-xl md:text-2xl text-gray-300 italic leading-relaxed">"A parceria com a Inovar foi fundamental para garantir a excelência e a sofisticação que o projeto exigia. A qualidade e o atendimento fizeram toda a diferença."</p>
@@ -279,25 +289,41 @@
     </section>
 
     <!-- CONTACT FORM -->
-    <section id="contato" class="section-padding relative bg-cover bg-center reveal" style="background-image: url('https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=2070&auto=format&fit=crop');">
+    <section id="contato" class="section-padding relative bg-cover bg-center reveal" style="background-image: url('images/b4.png');">
         <div class="absolute inset-0 bg-dark opacity-80"></div>
         <div class="container mx-auto px-6 lg:px-8 relative z-10">
             <div class="bg-dark/80 backdrop-blur-sm text-light p-8 md:p-12 lg:p-16 shadow-2xl clip-contact-form border border-white/10">
-                <div class="grid lg:grid-cols-2 gap-12 items-center">
-                    <div>
-                        <h2 class="text-3xl md:text-4xl font-light">Pronto para elevar a sua próxima obra?</h2>
-                        <p class="text-lg text-muted mt-4">Nossa equipe está pronta para apresentar a solução que irá superar suas expectativas.</p>
-                    </div>
-                    <form action="#" method="POST" class="w-full">
+                <div class="w-full max-w-xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-light">Seu consultor está no aguardo</h2>
+                    <p class="text-lg text-gray-300 mt-4 mb-8">Preencha os campos abaixo para iniciar a conversa.</p>
+                    <form class="w-full" id="contact-form">
                         <div class="grid grid-cols-1 gap-5">
-                            <input type="text" name="name" placeholder="Nome" required class="w-full px-4 py-3 form-input">
-                            <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-3 form-input">
-                            <input type="tel" name="phone" placeholder="Telefone / WhatsApp" required class="w-full px-4 py-3 form-input">
+                            <input type="text" id="name" placeholder="Nome Completo" required class="w-full px-4 py-3 form-input">
+                            <select id="client_type" required class="w-full px-4 py-3 form-input form-select">
+                                <option value="" disabled selected>Você é...</option>
+                                <option value="Arquiteto(a)">Arquiteto(a)</option>
+                                <option value="Engenheiro(a)">Engenheiro(a)</option>
+                                <option value="Cliente Final">Cliente Final</option>
+                            </select>
+                            <div class="flex">
+                                <span class="inline-flex items-center px-3 bg-gray-200 border border-r-0 border-gray-300 text-gray-500">+55</span>
+                                <input type="tel" id="phone" placeholder="DDD + Número" required class="w-full px-4 py-3 form-input">
+                            </div>
+                            <select id="state" required class="w-full px-4 py-3 form-input form-select">
+                                <option value="" disabled selected>Selecione seu Estado</option>
+                                <option value="São Paulo">São Paulo</option>
+                                <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                <option value="Bahia">Bahia</option>
+                                <option value="Minas Gerais">Minas Gerais</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                            <textarea id="message" placeholder="Mensagem (opcional)" rows="3" class="w-full px-4 py-3 form-input"></textarea>
                             <button type="submit" class="w-full bg-accent-primary text-light font-bold py-4 px-4 text-lg hover:opacity-90 transition-opacity duration-700">
-                                Enviar Solicitação
+                                Iniciar Conversa no WhatsApp
                             </button>
                         </div>
                     </form>
+                    <div id="form-message" class="mt-4 text-center"></div>
                 </div>
             </div>
         </div>
@@ -330,6 +356,39 @@
             });
         });
     </script>
+    
+    <!-- SCRIPT DO CHATWOOT - COLE AQUI O CÓDIGO DO SEU WIDGET -->
+    <!-- ... todo o seu site termina aqui -->
+<script>
+    // Script para animação de scroll
+    // ... (o script de animação continua aqui)
+</script>
+
+<!-- SCRIPT DO CHATWOOT - COLE AQUI O CÓDIGO DO SEU WIDGET -->
+<script>
+  // O CÓDIGO GERADO PELO CHATWOOT DEVE SER COLADO AQUI
+  (function(d,t) {
+    var BASE_URL="https://chat.automatiser.tech";
+    var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    g.src=BASE_URL+"/packs/js/sdk.js";
+    g.defer = true;
+    g.async = true;
+    s.parentNode.insertBefore(g,s);
+    g.onload=function(){
+      window.chatwootSDK.run({
+        websiteToken: '7PoMZEZ6rETLx7M1LF4j3BVx',
+        baseUrl: BASE_URL
+      })
+    }
+  })(document,"script");
+</script>
+
+</body>
+</html>
+    <script>
+      // O CÓDIGO GERADO PELO CHATWOOT DEVE SER COLADO AQUI
+    </script>
+
 
 </body>
 </html>
