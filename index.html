@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inovar Esquadrias - Alto Padrão em Alumínio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Sora -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://placehold.co/32x32/BF6240/F4F1EB?text=I" type="image/png">
+
+    <style>
+        /* Estilos personalizados com a paleta de cores e design dinâmico */
+        :root {
+            --color-dark-bg: #272733;
+            --color-light-bg: #F4F1EB;
+            --color-accent-primary: #BF6240; /* Terracotta */
+            --color-accent-secondary: #8AB262; /* Verde Sálvia */
+            --color-text-dark: #272733;
+            --color-text-light: #F4F1EB;
+            --color-text-muted: #8C7B69;
+            --color-border: #DCE4E6;
+        }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--color-light-bg);
+            color: var(--color-text-dark);
+        }
+        .hero-bg {
+            background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .section-padding { padding: 6rem 1.5rem; }
+        @media (min-width: 1024px) { .section-padding { padding: 8rem 2rem; } }
+        
+        /* Helpers da Paleta */
+        .bg-dark { background-color: var(--color-dark-bg); }
+        .bg-light { background-color: var(--color-light-bg); }
+        .bg-accent-primary { background-color: var(--color-accent-primary); }
+        .bg-muted { background-color: var(--color-text-muted); }
+        .text-light { color: var(--color-text-light); }
+        .text-dark { color: var(--color-text-dark); }
+        .text-muted { color: var(--color-text-muted); }
+        .text-accent-secondary { color: var(--color-accent-secondary); }
+
+        .form-input {
+            background-color: #ffffff;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-dark);
+            transition: border-color 0.5s, box-shadow 0.5s;
+        }
+        .form-input::placeholder { color: var(--color-text-muted); }
+        .form-input:focus {
+            border-color: var(--color-accent-primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(191, 98, 64, 0.2);
+        }
+
+        .underline-link {
+            position: relative; text-decoration: none; display: inline-block;
+            color: var(--color-accent-primary); font-weight: 500;
+        }
+        .underline-link::after {
+            content: ''; position: absolute; width: 100%; transform: scaleX(0);
+            height: 1.5px; bottom: -3px; left: 0;
+            background-color: var(--color-accent-primary);
+            transform-origin: bottom right; transition: transform 0.5s ease-out;
+        }
+        .underline-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
+
+        /* Formas Dinâmicas e Recortes */
+        .clip-img-1 { clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 85%); }
+        .clip-img-2 { clip-path: polygon(0 15%, 100% 0, 100% 85%, 0 100%); }
+        .clip-contact-form { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); }
+        .clip-diagonal-img { clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%); }
+        .clip-presentation-img { clip-path: polygon(25% 0%, 100% 0, 100% 100%, 25% 100%, 0 50%); }
+        
+        .clip-solution-bottom {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8vw));
+        }
+
+
+        @media (max-width: 1023px) {
+            .clip-img-1, 
+            .clip-img-2,
+            .clip-diagonal-img,
+            .clip-presentation-img,
+            .clip-contact-form,
+            .clip-solution-bottom { clip-path: none; }
+        }
+
+        /* Animações de Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.4s ease-out, transform 1s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- HERO SECTION -->
+    <section class="hero-bg">
+        <div class="bg-black bg-opacity-60 min-h-screen relative flex items-center">
+            <!-- Logo -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 p-6">
+                 <img src="images/logo_branco.png" alt="Logo Inovar Esquadrias" class="h-10 lg:h-12">
+            </div>
+            
+            <!-- Content -->
+            <div class="container mx-auto px-6 lg:px-8">
+                 <div class="max-w-3xl text-left">
+                    <h1 class="text-4xl md:text-[3.25rem] font-extralight uppercase tracking-wider text-white leading-tight mb-4">Design único<br>para projetos incomparáveis.</h1>
+                    <p class="text-lg md:text-xl text-gray-200 mb-8">Desenvolvemos soluções personalizadas em esquadrias de alto padrão que integram estética e performance.</p>
+                    <a href="#contato" class="bg-accent-primary text-light font-bold py-3 px-8 text-lg hover:opacity-90 transition-opacity duration-700 inline-block">Solicitar Orçamento</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRESENTATION SECTION -->
+    <section id="apresentacao" class="bg-dark overflow-hidden reveal">
+        <div class="lg:flex">
+            <div class="lg:w-1/2 flex items-center">
+                <div class="py-16 px-6 md:p-12 lg:p-24">
+                    <h2 class="text-3xl md:text-4xl font-light mb-6 text-light">Sua obra merece mais que o comum.</h2>
+                    <p class="text-lg text-gray-400 mb-8">A excelência está nos detalhes. Unimos tecnologia e design autoral para criar peças que são o toque de sofisticação que sua obra precisa.</p>
+                    <div class="border-l-2 border-accent-secondary pl-6 space-y-2 text-light">
+                        <p>Design Exclusivo</p>
+                        <p>Performance Superior</p>
+                        <p>Acabamento Impecável</p>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:w-1/2 h-96 lg:h-auto">
+                 <img src="images/b2.jpg" class="h-full w-full object-cover clip-presentation-img" alt="[Interior de uma sala moderna com janelas amplas]" onerror="this.onerror=null;this.src='https://placehold.co/800x600/272733/FFFFFF?text=Design';">
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION, VISION, VALUES -->
+    <section id="missao-visao-valores" class="section-padding bg-light reveal">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="relative shadow-2xl overflow-hidden">
+                    <img src="images/casa_nk.jpg" class="w-full h-full object-cover" alt="[Detalhe arquitetónico que inspira confiança]" onerror="this.onerror=null;this.src='https://placehold.co/600x800/F4F1EB/272733?text=Nossa+Essência';">
+                </div>
+                <div>
+                     <h2 class="text-3xl md:text-4xl font-light text-dark mb-10">Nossa Essência</h2>
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-accent-secondary">Missão</h3>
+                            <p class="text-muted">Unir design e performance, atendendo profissionais com produtos tecnicamente avançados e visualmente integrados.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-accent-secondary">Visão</h3>
+                            <p class="text-muted">Ser a principal referência em esquadrias de alto padrão, reconhecida pela inovação, qualidade e por dar vida a grandes obras.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold mb-2 text-accent-secondary">Valores</h3>
+                            <p class="text-muted">Qualidade, compromisso, inovação, responsabilidade ambiental e valorização da estética em cada detalhe.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE RISK SECTION -->
+    <section id="o_risco_da_escolha" class="bg-dark overflow-hidden reveal">
+        <div class="lg:flex flex-row-reverse">
+            <div class="lg:w-1/2 flex items-center">
+                <div class="py-16 px-6 md:p-12 lg:p-24">
+                    <h2 class="text-3xl md:text-4xl font-light mb-6 text-light">Arquitetura de alto padrão não admite improvisos.</h2>
+                    <p class="text-lg text-gray-400 mb-8">Sabemos que a escolha de um fornecedor pode definir o sucesso de uma obra. Atrasos e acabamentos de baixa qualidade não comprometem apenas o cronograma, mas a integridade e o valor de todo o empreendimento.</p>
+                    <div class="text-light space-y-4 border-l-2 border-accent-primary pl-6">
+                        <p>A escolha certa evita prejuízos, estresse e garante a materialização impecável da sua visão arquitetônica.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="lg:w-1/2 h-96 lg:h-auto">
+                <img src="images/aw2.jpg" class="h-full w-full object-cover clip-diagonal-img" alt="[Detalhe de esquadria minimalista em ambiente de luxo]" onerror="this.onerror=null;this.src='https://placehold.co/800x600/272733/FFFFFF?text=Planejamento';">
+            </div>
+        </div>
+    </section>
+
+    <!-- THE SOLUTION SECTION -->
+    <section id="a_solucao_inovar" class="bg-light reveal clip-solution-bottom">
+        <div class="container mx-auto px-6 lg:px-8 pt-16 lg:pt-24 pb-24 lg:pb-48">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-light text-dark">A Inovar é para quem não abre mão da excelência.</h2>
+                <p class="text-lg text-muted mt-4">Resolvemos os pontos críticos da sua obra com um processo que une precisão, tecnologia e compromisso.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Item 1 -->
+                <div class="text-center p-6 transition-transform duration-700 transform hover:-translate-y-2">
+                    <div class="text-accent-secondary w-16 h-16 mx-auto mb-4 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8.11 3.79"></path><path d="M2 12H12a10 10 0 0 0-10-10v10z"></path></svg></div>
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Engenharia Sob Medida</h3>
+                    <p class="text-muted">Soluções personalizadas que se adaptam perfeitamente à sua arquitetura.</p>
+                </div>
+                <!-- Item 2 -->
+                <div class="text-center p-6 transition-transform duration-700 transform hover:-translate-y-2">
+                    <div class="text-accent-secondary w-16 h-16 mx-auto mb-4 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Durabilidade Comprovada</h3>
+                    <p class="text-muted">Matéria-prima de excelência e acabamento premium que valorizam a obra.</p>
+                </div>
+                <!-- Item 3 -->
+                <div class="text-center p-6 transition-transform duration-700 transform hover:-translate-y-2">
+                    <div class="text-accent-secondary w-16 h-16 mx-auto mb-4 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Consultoria Técnica</h3>
+                    <p class="text-muted">Nossa equipe de especialistas oferece suporte contínuo, da concepção à instalação.</p>
+                </div>
+                <!-- Item 4 -->
+                <div class="text-center p-6 transition-transform duration-700 transform hover:-translate-y-2">
+                    <div class="text-accent-secondary w-16 h-16 mx-auto mb-4 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg></div>
+                    <h3 class="text-xl font-semibold mb-2 text-dark">Compromisso com o Prazo</h3>
+                    <p class="text-muted">Instalação de precisão e pontualidade para que sua obra siga o fluxo planejado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS GALLERY -->
+    <section id="projetos" class="bg-light reveal lg:-mt-[8vw]">
+        <div class="container mx-auto px-6 lg:px-8 pt-16 lg:pt-24 pb-16 lg:pb-24">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-light text-dark">Projetos que inspiram.</h2>
+                <p class="text-lg text-muted mt-4">Luz, forma e engenharia se fundem em soluções com foco na longevidade e no acabamento impecável.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center">
+                <div class="group">
+                    <div class="mb-4 shadow-lg overflow-hidden bg-dark"><img src="images/casa_cor.jpg" alt="[Projeto Fazenda Carolina]" class="w-full h-96 object-cover transform group-hover:scale-105 transition-transform duration-700 clip-img-1" onerror="this.onerror=null;this.src='https://placehold.co/600x800/F4F1EB/272733?text=Projeto+1';"></div>
+                    <h3 class="text-xl font-semibold text-dark">Casa Cor</h3>
+                    <a href="#contato" class="underline-link">Ver mais</a>
+                </div>
+                <div class="group">
+                    <div class="mb-4 shadow-lg overflow-hidden bg-dark"><img src="images/casa_neblina.jpg" alt="[Projeto Ibiá House]" class="w-full h-96 object-cover transform group-hover:scale-105 transition-transform duration-700 clip-img-2" onerror="this.onerror=null;this.src='https://placehold.co/600x800/F4F1EB/272733?text=Projeto+2';"></div>
+                    <h3 class="text-xl font-semibold text-dark">Casa Neblina</h3>
+                    <a href="#contato" class="underline-link">Ver mais</a>
+                </div>
+                <div class="group">
+                    <div class="mb-4 shadow-lg overflow-hidden bg-dark"><img src="images/paraty.jpg" alt="[Projeto Casa França]" class="w-full h-96 object-cover transform group-hover:scale-105 transition-transform duration-700 clip-img-1" onerror="this.onerror=null;this.src='https://placehold.co/600x800/F4F1EB/272733?text=Projeto+3';"></div>
+                    <h3 class="text-xl font-semibold text-dark">Paraty House</h3>
+                    <a href="#contato" class="underline-link">Ver mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="depoimentos" class="section-padding bg-dark reveal">
+        <div class="container mx-auto px-6 lg:px-8 max-w-4xl">
+            <div class="grid lg:grid-cols-3 gap-8 items-center">
+                 <div class="flex justify-center">
+                    <img src="images/maos.jpg" class="w-32 h-32 object-cover border-4 border-gray-700" alt="[Aperto de mãos profissional simbolizando uma parceria de sucesso]">
+                 </div>
+                 <div class="lg:col-span-2 mt-6 lg:mt-0 text-center lg:text-left">
+                    <p class="text-xl md:text-2xl text-gray-300 italic leading-relaxed">"A parceria com a Inovar foi fundamental para garantir a excelência e a sofisticação que o projeto exigia. A qualidade e o atendimento fizeram toda a diferença."</p>
+                    <p class="font-bold text-light mt-6">Mariana Costa</p>
+                    <p class="text-sm text-muted">Arquiteta - MC Arquitetura</p>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM -->
+    <section id="contato" class="section-padding relative bg-cover bg-center reveal" style="background-image: url('https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?q=80&w=2070&auto=format&fit=crop');">
+        <div class="absolute inset-0 bg-dark opacity-80"></div>
+        <div class="container mx-auto px-6 lg:px-8 relative z-10">
+            <div class="bg-dark/80 backdrop-blur-sm text-light p-8 md:p-12 lg:p-16 shadow-2xl clip-contact-form border border-white/10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-light">Pronto para elevar a sua próxima obra?</h2>
+                        <p class="text-lg text-muted mt-4">Nossa equipe está pronta para apresentar a solução que irá superar suas expectativas.</p>
+                    </div>
+                    <form action="#" method="POST" class="w-full">
+                        <div class="grid grid-cols-1 gap-5">
+                            <input type="text" name="name" placeholder="Nome" required class="w-full px-4 py-3 form-input">
+                            <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-3 form-input">
+                            <input type="tel" name="phone" placeholder="Telefone / WhatsApp" required class="w-full px-4 py-3 form-input">
+                            <button type="submit" class="w-full bg-accent-primary text-light font-bold py-4 px-4 text-lg hover:opacity-90 transition-opacity duration-700">
+                                Enviar Solicitação
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-muted py-8">
+        <div class="container mx-auto px-6 lg:px-8 text-center text-light">
+            <p>&copy; 2025 Inovar Esquadrias. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Script para animação de scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+
+</body>
+</html>
