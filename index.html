@@ -34,6 +34,7 @@
             scroll-behavior: smooth;
             background-color: var(--color-light-bg);
             color: var(--color-text-dark);
+            padding-top: 64px; /* Espaço para o header fixo mobile */
         }
         .hero-bg {
             background-image: url('images/banner.jpg');
@@ -42,7 +43,10 @@
             background-attachment: fixed;
         }
         .section-padding { padding: 6rem 1.5rem; }
-        @media (min-width: 1024px) { .section-padding { padding: 8rem 2rem; } }
+        @media (min-width: 1024px) { 
+            .section-padding { padding: 8rem 2rem; }
+            body { padding-top: 96px; } /* Espaço para o header fixo desktop */
+        }
         
         /* Helpers da Paleta */
         .bg-dark { background-color: var(--color-dark-bg); }
@@ -53,29 +57,6 @@
         .text-dark { color: var(--color-text-dark); }
         .text-muted { color: var(--color-text-muted); }
         .text-accent-secondary { color: var(--color-accent-secondary); }
-
-        .form-input {
-            background-color: #ffffff;
-            border: 1px solid var(--color-border);
-            color: var(--color-text-dark);
-            transition: border-color 0.5s, box-shadow 0.5s;
-        }
-        .form-input::placeholder { color: var(--color-text-muted); }
-        .form-input:focus {
-            border-color: var(--color-accent-primary);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(191, 98, 64, 0.2);
-        }
-        .form-select {
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238C7B69' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 0.5rem center;
-            background-repeat: no-repeat;
-            background-size: 1.5em 1.5em;
-            padding-right: 2.5rem;
-        }
 
         .underline-link {
             position: relative; text-decoration: none; display: inline-block;
@@ -120,18 +101,46 @@
             opacity: 1;
             transform: translateY(0);
         }
+        
     </style>
 </head>
 <body class="antialiased">
 
+    <!-- HEADER FIXO -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-muted shadow-lg">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Mobile and Desktop Header -->
+            <div class="flex justify-between items-center h-16 lg:h-24">
+                <!-- Logo (Esquerda no Mobile) -->
+                <div class="flex-1 lg:hidden">
+                    <a href="#">
+                        <img src="images/logo_branco.png" alt="Logo Inovar Esquadrias" class="w-36 transition-all duration-300">
+                    </a>
+                </div>
+
+                <!-- Logo Centralizado (Apenas Desktop) -->
+                <div class="hidden lg:flex w-1/3 justify-start">
+                     <!-- Espaço em branco para balancear -->
+                </div>
+                <div class="hidden lg:flex w-1/3 justify-center">
+                     <a href="#">
+                        <img src="images/logo_branco.png" alt="Logo Inovar Esquadrias" class="w-48 transition-all duration-300">
+                    </a>
+                </div>
+
+                <!-- CTA Button (Direita em ambos) -->
+                <div class="w-auto lg:w-1/3 flex justify-end">
+                    <a href="#contato" class="border border-white/50 text-white px-3 py-2 lg:px-5 text-xs lg:text-sm font-light hover:bg-white/20 transition-colors duration-300 whitespace-nowrap">
+                        SOLICITAR ORÇAMENTO
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <!-- HERO SECTION -->
     <section class="hero-bg">
-        <div class="bg-black bg-opacity-60 min-h-screen relative flex items-center">
-            <!-- Logo -->
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 p-6">
-                 <img src="images/logo_branco.png" alt="Logo Inovar Esquadrias" class="h-10 lg:h-12 w-auto">
-            </div>
-            
+        <div class="bg-black bg-opacity-60 min-h-screen flex items-center pt-16 lg:pt-24"> <!-- pt para compensar o header fixo -->
             <!-- Content -->
             <div class="container mx-auto px-6 lg:px-8">
                  <div class="max-w-3xl text-left">
@@ -355,40 +364,96 @@
                 observer.observe(el);
             });
         });
+
+        // Script para WhatsApp e Chatwoot
+        document.getElementById('contact-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const button = this.querySelector('button[type="submit"]');
+            const formMessage = document.getElementById('form-message');
+            
+            button.textContent = 'Enviando...';
+            button.disabled = true;
+            formMessage.textContent = '';
+
+            // --- INFORMAÇÕES PARA CONFIGURAR ---
+            const businessPhoneNumber = '5511962152967'; // Formato: 55 + DDD + Número (sem + ou espaços)
+            const chatwootBaseUrl = 'https://chat.automatiser.tech'; 
+            const chatwootWebsiteToken = '7PoMZEZ6rETLx7M1LF4j3BVx';
+            // ------------------------------------
+
+            const name = document.getElementById('name').value;
+            const clientType = document.getElementById('client_type').value;
+            const phone = document.getElementById('phone').value;
+            const state = document.getElementById('state').value;
+            const message = document.getElementById('message').value;
+
+            const fullPhoneNumber = '55' + phone.replace(/\D/g, '');
+            
+            // 1. Tenta enviar para o Chatwoot em segundo plano
+            try {
+                const chatwootPayload = {
+                    name: name,
+                    phone_number: `+${fullPhoneNumber}`, // Formato E.164 para a API
+                    custom_attributes: {
+                        'Tipo de Cliente': clientType,
+                        'Estado': state
+                    }
+                };
+                
+                await fetch(`${chatwootBaseUrl}/public/api/v1/inboxes/${chatwootWebsiteToken}/contacts`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(chatwootPayload),
+                });
+            } catch (error) {
+                console.error('Erro ao criar contato no Chatwoot:', error);
+            }
+
+            // 2. Prepara e abre o link do WhatsApp
+            const whatsappMessage = `Olá! Gostaria de um orçamento.\n\n*Nome:* ${name}\n*Telefone:* +${fullPhoneNumber}\n*Eu sou:* ${clientType}\n*Estado:* ${state}\n*Mensagem:* ${message || 'Nenhuma.'}`;
+            const whatsappUrl = `https://wa.me/${businessPhoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+            
+            window.open(whatsappUrl, '_blank');
+            
+            // 3. Reseta o formulário
+            button.textContent = 'Iniciar Conversa no WhatsApp';
+            button.disabled = false;
+            document.getElementById('contact-form').reset();
+            formMessage.textContent = 'Abrindo o WhatsApp...';
+            formMessage.style.color = 'var(--color-accent-secondary)';
+            
+        });
     </script>
-    
-    <!-- SCRIPT DO CHATWOOT - COLE AQUI O CÓDIGO DO SEU WIDGET -->
-    <!-- ... todo o seu site termina aqui -->
-<script>
-    // Script para animação de scroll
-    // ... (o script de animação continua aqui)
-</script>
+
+</body>
+</html>
 
 <!-- SCRIPT DO CHATWOOT - COLE AQUI O CÓDIGO DO SEU WIDGET -->
 <script>
-  // O CÓDIGO GERADO PELO CHATWOOT DEVE SER COLADO AQUI
-  (function(d,t) {
-    var BASE_URL="https://chat.automatiser.tech";
-    var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=BASE_URL+"/packs/js/sdk.js";
-    g.defer = true;
-    g.async = true;
-    s.parentNode.insertBefore(g,s);
-    g.onload=function(){
-      window.chatwootSDK.run({
-        websiteToken: '7PoMZEZ6rETLx7M1LF4j3BVx',
-        baseUrl: BASE_URL
-      })
-    }
-  })(document,"script");
-</script>
-
-</body>
-</html>
-    <script>
-      // O CÓDIGO GERADO PELO CHATWOOT DEVE SER COLADO AQUI
-    </script>
-
-
-</body>
-</html>
+    // O CÓDIGO GERADO PELO CHATWOOT DEVE SER COLADO AQUI
+    (function(d,t) {
+      var BASE_URL="https://chat.automatiser.tech";
+      var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=BASE_URL+"/packs/js/sdk.js";
+      g.defer = true;
+      g.async = true;
+      s.parentNode.insertBefore(g,s);
+      g.onload=function(){
+        window.chatwootSDK.run({
+          websiteToken: '7PoMZEZ6rETLx7M1LF4j3BVx',
+          baseUrl: BASE_URL
+        })
+      }
+    })(document,"script");
+  </script>
+  
+  </body>
+  </html>
+      <script>
+        // O CÓDIGO GERADO PELO CHATWOOT DEVE SER COLADO AQUI
+      </script>
+  
+  
+  </body>
+  </html>
