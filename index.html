@@ -58,6 +58,33 @@
         .text-muted { color: var(--color-text-muted); }
         .text-accent-secondary { color: var(--color-accent-secondary); }
 
+        .form-input {
+            background-color: #ffffff;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-dark);
+            transition: border-color 0.5s, box-shadow 0.5s;
+        }
+        .form-input::placeholder { color: var(--color-text-muted); }
+        .form-input:focus {
+            border-color: var(--color-accent-primary);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(191, 98, 64, 0.2);
+        }
+        .form-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238C7B69' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+        .form-select:required:invalid {
+            color: var(--color-text-muted);
+        }
+
+
         .underline-link {
             position: relative; text-decoration: none; display: inline-block;
             color: var(--color-accent-primary); font-weight: 500;
@@ -109,16 +136,15 @@
     <!-- HEADER FIXO -->
     <header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-muted shadow-lg">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Mobile and Desktop Header -->
             <div class="flex justify-between items-center h-16 lg:h-24">
-                <!-- Logo (Esquerda no Mobile) -->
-                <div class="flex-1 lg:hidden">
+                <!-- Logo para Mobile -->
+                <div class="lg:hidden">
                     <a href="#">
                         <img src="images/logo_branco.png" alt="Logo Inovar Esquadrias" class="w-36 transition-all duration-300">
                     </a>
                 </div>
 
-                <!-- Logo Centralizado (Apenas Desktop) -->
+                <!-- Logo Centralizado para Desktop -->
                 <div class="hidden lg:flex w-1/3 justify-start">
                      <!-- Espaço em branco para balancear -->
                 </div>
@@ -363,97 +389,88 @@
             revealElements.forEach(el => {
                 observer.observe(el);
             });
-        });
 
-        // Script para WhatsApp e Chatwoot
-        document.getElementById('contact-form').addEventListener('submit', async function(event) {
-            event.preventDefault();
+            // Script para WhatsApp e Chatwoot
+            const contactForm = document.getElementById('contact-form');
+            if(contactForm) {
+                contactForm.addEventListener('submit', async function(event) {
+                    event.preventDefault();
 
-            const button = this.querySelector('button[type="submit"]');
-            const formMessage = document.getElementById('form-message');
-            
-            button.textContent = 'Enviando...';
-            button.disabled = true;
-            formMessage.textContent = '';
+                    const button = this.querySelector('button[type="submit"]');
+                    const formMessage = document.getElementById('form-message');
+                    
+                    button.textContent = 'Enviando...';
+                    button.disabled = true;
+                    formMessage.textContent = '';
 
-            // --- INFORMAÇÕES PARA CONFIGURAR ---
-            const businessPhoneNumber = '5511962152967'; // Formato: 55 + DDD + Número (sem + ou espaços)
-            const chatwootBaseUrl = 'https://chat.automatiser.tech'; 
-            const chatwootWebsiteToken = '7PoMZEZ6rETLx7M1LF4j3BVx';
-            // ------------------------------------
+                    // --- INFORMAÇÕES PARA CONFIGURAR ---
+                    const businessPhoneNumber = '5511985307758'; // Formato: 55 + DDD + Número (sem + ou espaços)
+                    const chatwootBaseUrl = 'https://chat.automatiser.tech'; 
+                    const chatwootWebsiteToken = '7PoMZEZ6rETLx7M1LF4j3BVx';
+                    // ------------------------------------
 
-            const name = document.getElementById('name').value;
-            const clientType = document.getElementById('client_type').value;
-            const phone = document.getElementById('phone').value;
-            const state = document.getElementById('state').value;
-            const message = document.getElementById('message').value;
+                    const name = document.getElementById('name').value;
+                    const clientType = document.getElementById('client_type').value;
+                    const phone = document.getElementById('phone').value;
+                    const state = document.getElementById('state').value;
+                    const message = document.getElementById('message').value;
 
-            const fullPhoneNumber = '55' + phone.replace(/\D/g, '');
-            
-            // 1. Tenta enviar para o Chatwoot em segundo plano
-            try {
-                const chatwootPayload = {
-                    name: name,
-                    phone_number: `+${fullPhoneNumber}`, // Formato E.164 para a API
-                    custom_attributes: {
-                        'Tipo de Cliente': clientType,
-                        'Estado': state
+                    const fullPhoneNumber = '55' + phone.replace(/\D/g, '');
+                    
+                    // 1. Tenta enviar para o Chatwoot em segundo plano
+                    try {
+                        const chatwootPayload = {
+                            name: name,
+                            phone_number: `+${fullPhoneNumber}`, // Formato E.164 para a API
+                            custom_attributes: {
+                                'Tipo de Cliente': clientType,
+                                'Estado': state
+                            }
+                        };
+                        
+                        await fetch(`${chatwootBaseUrl}/public/api/v1/inboxes/${chatwootWebsiteToken}/contacts`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(chatwootPayload),
+                        });
+                    } catch (error) {
+                        console.error('Erro ao criar contato no Chatwoot:', error);
                     }
-                };
-                
-                await fetch(`${chatwootBaseUrl}/public/api/v1/inboxes/${chatwootWebsiteToken}/contacts`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(chatwootPayload),
-                });
-            } catch (error) {
-                console.error('Erro ao criar contato no Chatwoot:', error);
-            }
 
-            // 2. Prepara e abre o link do WhatsApp
-            const whatsappMessage = `Olá! Gostaria de um orçamento.\n\n*Nome:* ${name}\n*Telefone:* +${fullPhoneNumber}\n*Eu sou:* ${clientType}\n*Estado:* ${state}\n*Mensagem:* ${message || 'Nenhuma.'}`;
-            const whatsappUrl = `https://wa.me/${businessPhoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-            
-            window.open(whatsappUrl, '_blank');
-            
-            // 3. Reseta o formulário
-            button.textContent = 'Iniciar Conversa no WhatsApp';
-            button.disabled = false;
-            document.getElementById('contact-form').reset();
-            formMessage.textContent = 'Abrindo o WhatsApp...';
-            formMessage.style.color = 'var(--color-accent-secondary)';
-            
+                    // 2. Prepara e abre o link do WhatsApp
+                    const whatsappMessage = `Olá! Gostaria de um orçamento.\n\n*Nome:* ${name}\n*Telefone:* +${fullPhoneNumber}\n*Eu sou:* ${clientType}\n*Estado:* ${state}\n*Mensagem:* ${message || 'Nenhuma.'}`;
+                    const whatsappUrl = `https://wa.me/${businessPhoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+                    
+                    window.open(whatsappUrl, '_blank');
+                    
+                    // 3. Reseta o formulário
+                    button.textContent = 'Iniciar Conversa no WhatsApp';
+                    button.disabled = false;
+                    this.reset();
+                    formMessage.textContent = 'Abrindo o WhatsApp...';
+                    formMessage.style.color = 'var(--color-accent-secondary)';
+                });
+            }
         });
+    </script>
+    
+    <!-- SCRIPT DO CHATWOOT - COLE AQUI O CÓDIGO DO SEU WIDGET -->
+    <script>
+      (function(d,t) {
+        var BASE_URL="https://chat.automatiser.tech";
+        var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src=BASE_URL+"/packs/js/sdk.js";
+        g.defer = true;
+        g.async = true;
+        s.parentNode.insertBefore(g,s);
+        g.onload=function(){
+          window.chatwootSDK.run({
+            websiteToken: '7PoMZEZ6rETLx7M1LF4j3BVx',
+            baseUrl: BASE_URL
+          })
+        }
+      })(document,"script");
     </script>
 
 </body>
 </html>
-
-<!-- SCRIPT DO CHATWOOT - COLE AQUI O CÓDIGO DO SEU WIDGET -->
-<script>
-    // O CÓDIGO GERADO PELO CHATWOOT DEVE SER COLADO AQUI
-    (function(d,t) {
-      var BASE_URL="https://chat.automatiser.tech";
-      var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-      g.src=BASE_URL+"/packs/js/sdk.js";
-      g.defer = true;
-      g.async = true;
-      s.parentNode.insertBefore(g,s);
-      g.onload=function(){
-        window.chatwootSDK.run({
-          websiteToken: '7PoMZEZ6rETLx7M1LF4j3BVx',
-          baseUrl: BASE_URL
-        })
-      }
-    })(document,"script");
-  </script>
-  
-  </body>
-  </html>
-      <script>
-        // O CÓDIGO GERADO PELO CHATWOOT DEVE SER COLADO AQUI
-      </script>
-  
-  
-  </body>
-  </html>
