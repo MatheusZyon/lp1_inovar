@@ -5,19 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inovar Esquadrias - Alto Padrão em Alumínio</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Sora -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Favicon -->
     <link rel="icon" href="images/favicon.png" type="image/png">
 
     <style>
-        /* Estilos personalizados com a paleta de cores e design dinâmico */
         :root {
             --color-dark-bg: #272733;
             --color-light-bg: #F4F1EB;
@@ -28,27 +24,38 @@
             --color-text-muted: #8C7B69;
             --color-border: #DCE4E6;
         }
-
         body {
             font-family: 'Sora', sans-serif;
             scroll-behavior: smooth;
             background-color: var(--color-light-bg);
             color: var(--color-text-dark);
-            padding-top: 64px; /* Espaço para o header fixo mobile */
         }
         .hero-bg {
             background-image: url('images/banner.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            position: relative; 
+            transform: scale(1); 
+            transition: transform 8.5s ease-out;
+        }
+        body.loaded .hero-bg {
+            transform: scale(1.05);
+        }
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 250px; 
+            background: linear-gradient(to top, var(--color-dark-bg) 25%, transparent 100%);
+            pointer-events: none;
         }
         .section-padding { padding: 6rem 1.5rem; }
         @media (min-width: 1024px) { 
             .section-padding { padding: 8rem 2rem; }
-            body { padding-top: 96px; } /* Espaço para o header fixo desktop */
         }
-        
-        /* Helpers da Paleta */
         .bg-dark { background-color: var(--color-dark-bg); }
         .bg-light { background-color: var(--color-light-bg); }
         .bg-accent-primary { background-color: var(--color-accent-primary); }
@@ -57,7 +64,6 @@
         .text-dark { color: var(--color-text-dark); }
         .text-muted { color: var(--color-text-muted); }
         .text-accent-secondary { color: var(--color-accent-secondary); }
-
         .form-input {
             background-color: #ffffff;
             border: 1px solid var(--color-border);
@@ -83,8 +89,6 @@
         .form-select:required:invalid {
             color: var(--color-text-muted);
         }
-
-
         .underline-link {
             position: relative; text-decoration: none; display: inline-block;
             color: var(--color-accent-primary); font-weight: 500;
@@ -96,29 +100,17 @@
             transform-origin: bottom right; transition: transform 0.5s ease-out;
         }
         .underline-link:hover::after { transform: scaleX(1); transform-origin: bottom left; }
-
-        /* Formas Dinâmicas e Recortes */
         .clip-img-1 { clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 85%); }
         .clip-img-2 { clip-path: polygon(0 15%, 100% 0, 100% 85%, 0 100%); }
         .clip-contact-form { clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); }
         .clip-diagonal-img { clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%); }
         .clip-presentation-img { clip-path: polygon(25% 0%, 100% 0, 100% 100%, 25% 100%, 0 50%); }
-        
         .clip-solution-bottom {
             clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 8vw));
         }
-
-
         @media (max-width: 1023px) {
-            .clip-img-1, 
-            .clip-img-2,
-            .clip-diagonal-img,
-            .clip-presentation-img,
-            .clip-contact-form,
-            .clip-solution-bottom { clip-path: none; }
+            .clip-img-1, .clip-img-2, .clip-diagonal-img, .clip-presentation-img, .clip-contact-form, .clip-solution-bottom { clip-path: none; }
         }
-
-        /* Animações de Scroll */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -128,48 +120,31 @@
             opacity: 1;
             transform: translateY(0);
         }
-        
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased overflow-x-hidden">
 
-    <!-- HEADER FIXO -->
-    <header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-muted shadow-lg">
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16 lg:h-24">
-                <!-- Logo para Mobile -->
                 <div class="lg:hidden">
-                    <a href="#">
-                        <img src="images/logo_branco.png" alt="Logo Inovar Esquadrias" class="w-36 transition-all duration-300">
-                    </a>
+                    <a href="#"><img src="images/logo_branco.png" alt="Logo Inovar Esquadrias" class="w-36 transition-all duration-300"></a>
                 </div>
-
-                <!-- Logo Centralizado para Desktop -->
-                <div class="hidden lg:flex w-1/3 justify-start">
-                     <!-- Espaço em branco para balancear -->
-                </div>
+                <div class="hidden lg:flex w-1/3 justify-start"></div>
                 <div class="hidden lg:flex w-1/3 justify-center">
-                     <a href="#">
-                        <img src="images/logo_branco.png" alt="Logo Inovar Esquadrias" class="w-48 transition-all duration-300">
-                    </a>
+                    <a href="#"><img src="images/logo_branco.png" alt="Logo Inovar Esquadrias" class="w-48 transition-all duration-300"></a>
                 </div>
-
-                <!-- CTA Button (Direita em ambos) -->
                 <div class="w-auto lg:w-1/3 flex justify-end">
-                    <a href="#contato" class="border border-white/50 text-white px-3 py-2 lg:px-5 text-xs lg:text-sm font-light hover:bg-white/20 transition-colors duration-300 whitespace-nowrap">
-                        SOLICITAR ORÇAMENTO
-                    </a>
+                    <a href="#contato" class="border border-white/50 text-white px-3 py-2 lg:px-5 text-xs lg:text-sm font-light hover:bg-white/20 transition-colors duration-300 whitespace-nowrap">SOLICITAR ORÇAMENTO</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
     <section class="hero-bg">
-        <div class="bg-black bg-opacity-60 min-h-screen flex items-center pt-16 lg:pt-24"> <!-- pt para compensar o header fixo -->
-            <!-- Content -->
+        <div class="bg-black bg-opacity-60 min-h-screen flex items-center pt-16 lg:pt-24"> 
             <div class="container mx-auto px-6 lg:px-8">
-                 <div class="max-w-3xl text-left">
+                <div class="max-w-3xl text-left">
                     <h1 class="text-4xl md:text-[3.25rem] font-extralight uppercase tracking-wider text-white leading-tight mb-4">Design único<br>para projetos incomparáveis.</h1>
                     <p class="text-lg md:text-xl text-gray-200 mb-8">Desenvolvemos soluções personalizadas em esquadrias de alto padrão que integram estética e performance.</p>
                     <a href="#contato" class="bg-accent-primary text-light font-bold py-3 px-8 text-lg hover:opacity-90 transition-opacity duration-700 inline-block">Solicitar Orçamento</a>
@@ -178,7 +153,6 @@
         </div>
     </section>
 
-    <!-- PRESENTATION SECTION -->
     <section id="apresentacao" class="bg-dark overflow-hidden reveal">
         <div class="lg:flex">
             <div class="lg:w-1/2 flex items-center">
@@ -193,12 +167,11 @@
                 </div>
             </div>
             <div class="lg:w-1/2 h-96 lg:h-auto">
-                 <img src="images/b2.jpg" class="h-full w-full object-cover clip-presentation-img" alt="Interior de uma sala moderna com janelas amplas">
+                <img src="images/b2.jpg" class="h-full w-full object-cover clip-presentation-img" alt="Interior de uma sala moderna com janelas amplas">
             </div>
         </div>
     </section>
 
-    <!-- MISSION, VISION, VALUES -->
     <section id="missao-visao-valores" class="section-padding bg-light reveal">
         <div class="container mx-auto px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-16 items-center">
@@ -206,7 +179,7 @@
                     <img src="images/casa_nk.jpg" class="w-full h-full object-cover" alt="Detalhe arquitetónico que inspira confiança">
                 </div>
                 <div>
-                     <h2 class="text-3xl md:text-4xl font-light text-dark mb-10">Nossa Essência</h2>
+                    <h2 class="text-3xl md:text-4xl font-light text-dark mb-10">Nossa Essência</h2>
                     <div class="space-y-8">
                         <div>
                             <h3 class="text-xl font-semibold mb-2 text-accent-secondary">Missão</h3>
@@ -226,7 +199,6 @@
         </div>
     </section>
 
-    <!-- THE RISK SECTION -->
     <section id="o_risco_da_escolha" class="bg-dark overflow-hidden reveal">
         <div class="lg:flex flex-row-reverse">
             <div class="lg:w-1/2 flex items-center">
@@ -244,7 +216,6 @@
         </div>
     </section>
 
-    <!-- THE SOLUTION SECTION -->
     <section id="a_solucao_inovar" class="bg-light reveal clip-solution-bottom">
         <div class="container mx-auto px-6 lg:px-8 pt-16 lg:pt-24 pb-24 lg:pb-48">
             <div class="text-center max-w-3xl mx-auto mb-16">
@@ -252,25 +223,21 @@
                 <p class="text-lg text-muted mt-4">Resolvemos os pontos críticos da sua obra com um processo que une precisão, tecnologia e compromisso.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Item 1 -->
                 <div class="text-center p-6 transition-transform duration-700 transform hover:-translate-y-2">
                     <div class="text-accent-secondary w-16 h-16 mx-auto mb-4 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8.11 3.79"></path><path d="M2 12H12a10 10 0 0 0-10-10v10z"></path></svg></div>
                     <h3 class="text-xl font-semibold mb-2 text-dark">Engenharia Sob Medida</h3>
                     <p class="text-muted">Soluções personalizadas que se adaptam perfeitamente à sua arquitetura.</p>
                 </div>
-                <!-- Item 2 -->
                 <div class="text-center p-6 transition-transform duration-700 transform hover:-translate-y-2">
                     <div class="text-accent-secondary w-16 h-16 mx-auto mb-4 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
                     <h3 class="text-xl font-semibold mb-2 text-dark">Durabilidade Comprovada</h3>
                     <p class="text-muted">Matéria-prima de excelência e acabamento premium que valorizam a obra.</p>
                 </div>
-                <!-- Item 3 -->
                 <div class="text-center p-6 transition-transform duration-700 transform hover:-translate-y-2">
                     <div class="text-accent-secondary w-16 h-16 mx-auto mb-4 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
                     <h3 class="text-xl font-semibold mb-2 text-dark">Consultoria Técnica</h3>
                     <p class="text-muted">Nossa equipe de especialistas oferece suporte contínuo, da concepção à instalação.</p>
                 </div>
-                <!-- Item 4 -->
                 <div class="text-center p-6 transition-transform duration-700 transform hover:-translate-y-2">
                     <div class="text-accent-secondary w-16 h-16 mx-auto mb-4 flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg></div>
                     <h3 class="text-xl font-semibold mb-2 text-dark">Compromisso com o Prazo</h3>
@@ -280,7 +247,6 @@
         </div>
     </section>
 
-    <!-- PROJECTS GALLERY -->
     <section id="projetos" class="bg-light reveal lg:-mt-[8vw]">
         <div class="container mx-auto px-6 lg:px-8 pt-16 lg:pt-24 pb-16 lg:pb-24">
             <div class="text-center max-w-3xl mx-auto mb-16">
@@ -307,23 +273,21 @@
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
     <section id="depoimentos" class="section-padding bg-dark reveal">
         <div class="container mx-auto px-6 lg:px-8 max-w-4xl">
             <div class="grid lg:grid-cols-3 gap-8 items-center">
-                 <div class="flex justify-center">
+                <div class="flex justify-center">
                     <img src="images/maos.jpg" class="w-32 h-32 object-cover border-4 border-gray-700" alt="Aperto de mãos profissional simbolizando uma parceria de sucesso">
-                 </div>
-                 <div class="lg:col-span-2 mt-6 lg:mt-0 text-center lg:text-left">
+                </div>
+                <div class="lg:col-span-2 mt-6 lg:mt-0 text-center lg:text-left">
                     <p class="text-xl md:text-2xl text-gray-300 italic leading-relaxed">"A parceria com a Inovar foi fundamental para garantir a excelência e a sofisticação que o projeto exigia. A qualidade e o atendimento fizeram toda a diferença."</p>
                     <p class="font-bold text-light mt-6">Mariana Costa</p>
                     <p class="text-sm text-muted">Arquiteta - MC Arquitetura</p>
-                 </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT FORM -->
     <section id="contato" class="section-padding relative bg-cover bg-center reveal" style="background-image: url('images/b4.png');">
         <div class="absolute inset-0 bg-dark opacity-80"></div>
         <div class="container mx-auto px-6 lg:px-8 relative z-10">
@@ -353,9 +317,7 @@
                                 <option value="Outro">Outro</option>
                             </select>
                             <textarea id="message" placeholder="Mensagem (opcional)" rows="3" class="w-full px-4 py-3 form-input"></textarea>
-                            <button type="submit" class="w-full bg-accent-primary text-light font-bold py-4 px-4 text-lg hover:opacity-90 transition-opacity duration-700">
-                                Iniciar Conversa no WhatsApp
-                            </button>
+                            <button type="submit" class="w-full bg-accent-primary text-light font-bold py-4 px-4 text-lg hover:opacity-90 transition-opacity duration-700">Iniciar Conversa no WhatsApp</button>
                         </div>
                     </form>
                     <div id="form-message" class="mt-4 text-center"></div>
@@ -364,16 +326,57 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-muted py-8">
-        <div class="container mx-auto px-6 lg:px-8 text-center text-light">
-            <p>&copy; 2025 Inovar Esquadrias. Todos os direitos reservados.</p>
+    <footer class="bg-dark text-light py-16">
+        <div class="container mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+                <div class="flex flex-col items-center md:items-start">
+                    <a href="#" class="mb-4">
+                        <img src="images/logo_branco.png" alt="Logo Inovar Esquadrias" class="w-40">
+                    </a>
+                    <p class="text-xs text-gray-400">© 2025 Inovar Esquadrias. <br>Todos os direitos reservados.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold uppercase tracking-wider mb-4">Contato</h3>
+                    <div class="space-y-3 text-gray-300 text-sm">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Rua+Santa+Felicia+285+Americanopolis+Sao+Paulo+SP" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center md:justify-start hover:text-accent-primary transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 flex-shrink-0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            <span>Rua Santa Felícia, 285, Americanópolis</span>
+                        </a>
+                        <a href="tel:+5511956242323" class="flex items-center justify-center md:justify-start hover:text-accent-primary transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 flex-shrink-0"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            <span>(11) 9 5624-2323</span>
+                        </a>
+                        <a href="mailto:contato@inovaresquadriasdealuminio.com.br" class="flex items-center justify-center md:justify-start hover:text-accent-primary transition-colors">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-3 flex-shrink-0"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <span>contato@inovaresquadriasdealuminio.com.br</span>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-semibold uppercase tracking-wider mb-4">Siga-nos</h3>
+                    <div class="flex justify-center md:justify-start">
+                        <a href="https://www.instagram.com/inovar_esquadrias_de_aluminio" target="_blank" rel="noopener noreferrer" class="text-gray-300 hover:text-accent-primary transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Script para animação de scroll
         document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('loaded');
+            const header = document.getElementById('main-header');
+            if (header) { 
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 50) { 
+                        header.classList.add('bg-dark', 'shadow-lg');
+                    } else { 
+                        header.classList.remove('bg-dark', 'shadow-lg');
+                    }
+                });
+            }
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -381,53 +384,36 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, {
-                threshold: 0.1
-            });
-
+            }, { threshold: 0.1 });
             const revealElements = document.querySelectorAll('.reveal');
-            revealElements.forEach(el => {
-                observer.observe(el);
-            });
-
-            // Script para WhatsApp e Chatwoot
+            revealElements.forEach(el => { observer.observe(el); });
             const contactForm = document.getElementById('contact-form');
             if(contactForm) {
                 contactForm.addEventListener('submit', async function(event) {
                     event.preventDefault();
-
                     const button = this.querySelector('button[type="submit"]');
                     const formMessage = document.getElementById('form-message');
-                    
                     button.textContent = 'Enviando...';
                     button.disabled = true;
                     formMessage.textContent = '';
-
-                    // --- INFORMAÇÕES PARA CONFIGURAR ---
-                    const businessPhoneNumber = '5511985307758'; // Formato: 55 + DDD + Número (sem + ou espaços)
-                    const chatwootBaseUrl = 'https://chat.automatiser.tech'; 
-                    const chatwootWebsiteToken = '7PoMZEZ6rETLx7M1LF4j3BVx';
-                    // ------------------------------------
-
+                    const businessPhoneNumber = '5511956242323';
+                    const chatwootBaseUrl = 'https://chat.inovaresquadrias.app'; 
+                    const chatwootWebsiteToken = 'RuxVFmDMh2MzdBWX2HJ1CeXo';
                     const name = document.getElementById('name').value;
                     const clientType = document.getElementById('client_type').value;
                     const phone = document.getElementById('phone').value;
                     const state = document.getElementById('state').value;
                     const message = document.getElementById('message').value;
-
                     const fullPhoneNumber = '55' + phone.replace(/\D/g, '');
-                    
-                    // 1. Tenta enviar para o Chatwoot em segundo plano
                     try {
                         const chatwootPayload = {
                             name: name,
-                            phone_number: `+${fullPhoneNumber}`, // Formato E.164 para a API
+                            phone_number: `+${fullPhoneNumber}`,
                             custom_attributes: {
                                 'Tipo de Cliente': clientType,
                                 'Estado': state
                             }
                         };
-                        
                         await fetch(`${chatwootBaseUrl}/public/api/v1/inboxes/${chatwootWebsiteToken}/contacts`, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
@@ -436,14 +422,9 @@
                     } catch (error) {
                         console.error('Erro ao criar contato no Chatwoot:', error);
                     }
-
-                    // 2. Prepara e abre o link do WhatsApp
                     const whatsappMessage = `Olá! Gostaria de um orçamento.\n\n*Nome:* ${name}\n*Telefone:* +${fullPhoneNumber}\n*Eu sou:* ${clientType}\n*Estado:* ${state}\n*Mensagem:* ${message || 'Nenhuma.'}`;
                     const whatsappUrl = `https://wa.me/${businessPhoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
-                    
                     window.open(whatsappUrl, '_blank');
-                    
-                    // 3. Reseta o formulário
                     button.textContent = 'Iniciar Conversa no WhatsApp';
                     button.disabled = false;
                     this.reset();
@@ -454,10 +435,9 @@
         });
     </script>
     
-    <!-- SCRIPT DO CHATWOOT - COLE AQUI O CÓDIGO DO SEU WIDGET -->
     <script>
       (function(d,t) {
-        var BASE_URL="https://chat.automatiser.tech";
+        var BASE_URL="https://chat.inovaresquadrias.app";
         var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
         g.src=BASE_URL+"/packs/js/sdk.js";
         g.defer = true;
@@ -465,12 +445,12 @@
         s.parentNode.insertBefore(g,s);
         g.onload=function(){
           window.chatwootSDK.run({
-            websiteToken: '7PoMZEZ6rETLx7M1LF4j3BVx',
+            websiteToken: 'RuxVFmDMh2MzdBWX2HJ1CeXo',
             baseUrl: BASE_URL
           })
         }
       })(document,"script");
     </script>
-
+    
 </body>
 </html>
